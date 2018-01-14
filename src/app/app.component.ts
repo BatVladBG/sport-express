@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Sport Express';
+  openLogOutModal = false;
+
+  logout() {
+    console.log('You logged out!');
+    this.openLogOutModal = false;
+  }
 }

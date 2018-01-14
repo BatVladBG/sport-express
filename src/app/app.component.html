@@ -1,4 +1,5 @@
 <clr-main-container>
+
   <clr-header>
     <div class="branding">
       <a href="#" [routerLink]="['/home']" class="nav-link">
@@ -6,31 +7,44 @@
         <span class="title">Sport Express</span>
       </a>
     </div>
-      <div class="header-nav" [clr-nav-level]="1">
-          <a class="nav-link" href="#" [routerLink]="['/register']" routerLinkActive="active"><span class="nav-text">Register</span></a>
-          <a class="nav-link" href="#" [routerLink]="['/login']" routerLinkActive="active"><span class="nav-text">Login</span></a>
-          <a class="nav-link" href="#" [routerLink]="['/profile']" routerLinkActive="active"><span class="nav-text"><clr-icon shape="user"></clr-icon></span></a>
-      </div>
+
+    <div class="header-nav" [clr-nav-level]="1">
+      <a class="nav-link" href="#" [routerLink]="['/products']" routerLinkActive="active">
+        <span class="nav-text">Products</span>
+      </a>
+      <a class="nav-link" href="#" [routerLink]="['/account/register']" routerLinkActive="active">
+        <span class="nav-text">Register</span>
+      </a>
+      <a class="nav-link" href="#" [routerLink]="['/account/login']" routerLinkActive="active">
+        <span class="nav-text">Login</span>
+      </a>
+    </div>
+
     <div class="header-actions">
-      <div class="dropdown">
-        <button class="dropdown-toggle">
+      <clr-dropdown>
+        <button class="nav-icon" clrDropdownTrigger>
           <clr-icon shape="user"></clr-icon>
-          <!-- <clr-icon shape="caret down"></clr-icon> -->
+          <clr-icon shape="caret down"></clr-icon>
         </button>
-        <div class="dropdown-menu">
-            <h4 class="dropdown-header">Dropdown header</h4>
-            <button type="button" class="dropdown-item">Lorem.</button>
-            <button type="button" class="dropdown-item">Lorem ipsum.</button>
-            <button type="button" class="dropdown-item">Lorem ipsum dolor.</button>
-            <div class="dropdown-divider"></div>
-            <button type="button" class="dropdown-item">Link</button>
-        </div>
-      </div>
+        <clr-dropdown-menu clrPosition="bottom-right" *clrIfOpen>
+          <a href="#" [routerLink]="['/account/profile']" clrDropdownItem>Profile</a>
+          <button (click)="openLogOutModal = true;" clrDropdownItem>Log out</button>
+        </clr-dropdown-menu>
+      </clr-dropdown>
     </div>
   </clr-header>
+
   <div class="content-container">
     <div class="content-area">
       <router-outlet></router-outlet>
     </div>
   </div>
+
+  <clr-modal [(clrModalOpen)]="openLogOutModal">
+      <h3 class="modal-title">Are you sure you want to log out?</h3>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline" (click)="openLogOutModal = false">No</button>
+          <button type="button" class="btn btn-primary" (click)="logout()">Yes</button>
+      </div>
+  </clr-modal>
 </clr-main-container>
